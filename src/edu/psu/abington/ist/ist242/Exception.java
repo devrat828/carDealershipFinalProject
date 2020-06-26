@@ -34,7 +34,7 @@ public class Exception extends Throwable {
                 throw new InputMismatchException();
             }
         } catch (InputMismatchException notAnAlpha) {
-            System.out.println("Invalid input. Please make sure you did not enter integers. Please try again.");
+            System.out.print("Invalid input. Please make sure you did not enter integers. Please try again: ");
             return testAlpha(getInput());
         }
     }

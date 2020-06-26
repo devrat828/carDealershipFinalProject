@@ -82,6 +82,7 @@ public class Main {
                     cList.add(main.addCustomer());
                     break;
                 case PRINT_CUST:
+                    System.out.println("List of Customers");
                     System.out.printf("%-15s | %-15s | %-15s | %-15s\n", "ID", "Name", "Phone Number", "Address");
                     Customer.printCustomer(cList);
                     break;
@@ -115,65 +116,42 @@ public class Main {
                     }
                     break;
                 case ORDER_CODE: //Order Page
-                    // add loop to prompt user to order more items
-                    String userInput = "Type 'Y'es to sell a car or type 'N'o to go back to the main menu: "; //TODO: change the naming of this line
-                    userAction = getAction(userInput);
-                    while (userAction != 'N') {
+
                         System.out.println("-------------------------------------------------------------------------");
                         System.out.println("                            ORDER - INVENTORY                            ");
                         System.out.println("-------------------------------------------------------------------------");
-                        //get input2 menu id
-                        Scanner input = new Scanner(System.in); //TODO: delete the cases and input from ilist instead
 
+                        int i = 0;
+                        boolean flag = true;
+                        int cust_ans_id;
+                        Order order = new Order(i++);
+                        Scanner scnr = new Scanner(System.in);
+                        System.out.print("Please enter your Customer ID: ");
+                        cust_ans_id = scnr.nextInt();
+                        boolean checker;
+                        checker = main.checker(cust_ans_id,cList);
+                        if(checker == true){
+                            System.out.println("Customer found and Verified!");
+                        }else{
+                            System.out.println("Customer not found!, Please enter in queue.");
+                            cList.add(main.addCustomer());
+                        }
+
+                        System.out.print("How many cars would you like to Order?: ");
+                        int ord_num = scnr.nextInt();
+                        scnr.nextLine();
+                        System.out.println("What would you like to order, we currently have: ");
                         Inventory.listMenu(iList);
+                        while(i <= ord_num) {
+                            oList.add(main.addOrder());
+                            i++;
+                        }
 
-                        System.out.println(" ");
-                        System.out.print("Enter Car ID: ");
-                        int menuId = input.nextInt();
-
-                        oList.add(or.order());
-                    }
-
-
-
-                    //print order
-
-                    //or.listOrder(oList);
-                    break;
+                        break;
 
                 case TRANS_CODE: //Transaction Page
                     Transaction transaction = new Transaction();
-                    System.out.println("Your order total is: $ " + orderTotal);
-                    transaction.sellCar();
-                    //                 System.out.println("Enter payment type: " + trans1.setPaymentType());
-
-                    //doesn't work - needs fixing
-                    /*System.out.println("Enter Customer ID: "); //TODO: which customer is buying the vehicle
-                    Scanner scnr = new Scanner(System.in);
-                    int inputID = scnr.nextInt();*/
-                    /*String input_cust = "Type 'N' to add a new customer or 'E' for an existing customer";
-
-                    userAction = getAction(input_cust);
-                    if (userAction == 'E') {
-                        System.out.println("Your order total is: $ " + orderTotal);//System.out.println(cust.getCustomerName(cust.getCust()) + "Your order total is: $ " + orderTotal);
-                        //System.out.println(cust.getCustomerName(inputID) + "Your order total is: $ " + orderTotal);
-                    }
-                    if (userAction == 'N') {
-                        cList.add(cust.addCustomer());
-                        cust.getCust();
-                    }
-
-                    //TODO: after selecting 'N' or 'E' for new or existing customer it jumps to this line to Enter Payment Type
-                    Transaction trans1 = new Transaction(1);
-                    tList.add(trans1);
-                    //System.out.println("Your order total is: $ " + orderTotal);
-                    // trans1.selectPayType();
-                    trans1.setPaymentType(trans1.selectPayType());
-
-                    System.out.println("TRANSACTION RECORD");
-                    trans1.printReceipt(orderTotal, trans1.getPaymentType());
-                    trans1.listTransactions(tList);*/
-
+                    transaction.sellCar(sList,cList,oList,iList);
                     break;
             }
             userAction = getAction(PROMPT_ACTION);
@@ -231,6 +209,29 @@ public class Main {
         while(itr.hasNext()) {
             Customer cust = (Customer) itr.next();
             if(cust.getUserId() == a){
+                result = true;
+                break;
+            }else{
+                result = false;
+            }
+        }
+        return result;
+    }
+
+    public Order addOrder(){
+        Order ord = new Order();
+        Scanner scnr = new Scanner(System.in);
+        System.out.print("Please Enter VIN number to order: ");
+        ord.setOrder(scnr.nextInt());
+        return ord;
+    }
+    public boolean sChecker(int a, ArrayList<salesPerson> sList) {
+        Iterator itr = sList.iterator();
+        boolean result = false;
+        // while(!result) {
+        while(itr.hasNext()) {
+            salesPerson sPerson = (salesPerson) itr.next();
+            if(sPerson.getUserId() == a){
                 result = true;
                 break;
             }else{

@@ -21,11 +21,11 @@ public class Order {
     private Customer cust;
     private Inventory menu;
     private int orderId, menuID;
+    private int order;
     private int custID, quantity;
     private double price;
     private double totalPrice;
-    double subTotal;
-    double orderTotal = 0;
+
 
 
     // CONSTRUCTOR METHOD -----------------------------------------------------------------------------------------------
@@ -45,9 +45,7 @@ public class Order {
 
 
     // GETTERS AND SETTERS ---------------------------------------------------------------------------------------------
-    public int getOrder (){
-        return orderId;
-    }
+
     public int getorderId() {
         return orderId;
     }
@@ -57,16 +55,14 @@ public class Order {
     public int getID (int _menuID) {
         return menuID;
     }
-    /*public void setQuantity(int _qty) {
-        this.quantity = _qty;
-    }*/
-    /*public int getQuantity() {
-        Scanner input = new Scanner(System.in);
-        quantity = input.nextInt();
-        return quantity;*/
 
+    public void setOrder(int order) {
+        this.order = order;
+    }
 
-
+    public int getOrder(){
+        return order;
+    }
 
     // METHODS -------------------------------------------------------------------------------------------------------
 
@@ -78,7 +74,7 @@ public class Order {
     // PRINT ORDER DETAILS
     public static void listOrder(ArrayList<Order> oList) {
         for (Order orderDetails : oList) {
-            System.out.println(orderDetails.getOrder());
+            System.out.println(orderDetails.getorderId());
         }
     }
 

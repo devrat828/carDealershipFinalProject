@@ -23,10 +23,11 @@ public class Customer extends User {
 
 
     public static void printCustomer(ArrayList<Customer> cList){
-        System.out.println("Customer List in the system");
+
         for (Customer cust: cList){
             System.out.printf("%-15s | %-15s | %-15s | %-15s\n", cust.getUserId(), cust.getUserName(), cust.getUserPhone(), cust.getUserAddress());
         }
     }
+
 
 }

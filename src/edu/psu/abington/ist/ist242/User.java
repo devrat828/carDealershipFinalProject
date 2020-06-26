@@ -9,7 +9,6 @@ Rev: 1
 */
 package edu.psu.abington.ist.ist242;
 
-enum userType {Customer, SalesPerson}
 
 public class User {
 
@@ -17,14 +16,14 @@ public class User {
     private String userName;
     private String userPhone;
     private String userAddress;
-    private userType userType;
 
-    public User(int userId, String userName, String userPhone, String userAddress, userType userType) {
+
+    public User(int userId, String userName, String userPhone, String userAddress) {
         this.userId = userId;
         this.userName = userName;
         this.userPhone = userPhone;
         this.userAddress = userAddress;
-        this.userType = userType;
+
     }
 
 
@@ -65,13 +64,6 @@ public class User {
         this.userAddress = userAddress;
     }
 
-    public userType getUserType() {
-        return userType;
-    }
-
-    public void setUserType(userType userType) {
-        this.userType = userType;
-    }
 
 
 }
