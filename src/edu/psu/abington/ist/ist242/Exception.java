@@ -24,6 +24,8 @@ public class Exception extends Throwable {
     }
 
 
+
+
     public static String testAlpha(String alphaCharacter) {
         try {
             if (alphaCharacter.matches("^[-'A-Za-z.\\s_-]+$")) {
@@ -47,11 +49,13 @@ public class Exception extends Throwable {
                     throw new NumberFormatException();
                 }
             } catch (NumberFormatException notAnInt) {
-                System.out.println("Invalid input. You did not enter alphanumeric characters. Please try again.");
+                System.out.print("Invalid input. You did not enter alphanumeric characters. Please try again: ");
                 return testAlphaNumeric(getInput());
             }
         }
     }
+
+
 
 
     public static String testPhone(String phone) {
@@ -63,7 +67,7 @@ public class Exception extends Throwable {
                     throw new InputMismatchException();
                 }
             } catch (InputMismatchException notAnEmail) {
-                System.out.println("Invalid input. Please try again.\nPlease use this format: (012) 345-6789");
+                System.out.print("Invalid input. Please try again: ");
                 return testPhone(getInput());
             }
         }

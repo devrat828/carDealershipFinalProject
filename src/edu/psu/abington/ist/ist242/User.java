@@ -8,19 +8,18 @@ Last date Changed: June 21, 2020
 Rev: 1
 */
 package edu.psu.abington.ist.ist242;
-import java.util.*;
 
 enum userType {Customer, SalesPerson}
 
 public class User {
 
-    private String userId;
+    private int userId;
     private String userName;
     private String userPhone;
     private String userAddress;
     private userType userType;
 
-    public User(String userId, String userName, String userPhone, String userAddress, userType userType) {
+    public User(int userId, String userName, String userPhone, String userAddress, userType userType) {
         this.userId = userId;
         this.userName = userName;
         this.userPhone = userPhone;
@@ -28,15 +27,17 @@ public class User {
         this.userType = userType;
     }
 
-    public User() {
 
+
+    public User() {
     }
 
-    public String getUserId() {
+
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -71,7 +72,6 @@ public class User {
     public void setUserType(userType userType) {
         this.userType = userType;
     }
-
 
 
 }

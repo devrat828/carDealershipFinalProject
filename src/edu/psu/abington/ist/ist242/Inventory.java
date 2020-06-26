@@ -15,7 +15,7 @@ import java.util.*;
 public class Inventory {
 
     //Class Level Variables - Protect the data
-    public String vin;
+    public int vin;
     public ArrayList invList;
     public double price;
     public String year;
@@ -24,7 +24,7 @@ public class Inventory {
 
 
     //Constructor Method
-    public Inventory(String _vin, String _year, String _make, String _model, double _price) {
+    public Inventory(int _vin, String _year, String _make, String _model, double _price) {
         this.vin = _vin;
         this.make = _make; // menuItem OR _menuItem
         this.year = _year;
@@ -38,11 +38,11 @@ public class Inventory {
 
 
     // SETTERS AND GETTERS --------------------------------------------------------------------------------------------------------------------------------------------------------------
-    public String getVin() {
+    public int getVin() {
         return vin;
     }
 
-    public void setVin(String vin) {
+    public void setVin(int vin) {
         this.vin = vin;
     }
 
@@ -64,7 +64,7 @@ public class Inventory {
         this.price = price;
     }
 
-    public double getPrice(String _vin) {
+    public double getPrice(int _vin) {
         this.vin = _vin;
         return price;
     }
@@ -101,24 +101,19 @@ public class Inventory {
     //add method to change menuItem price depending on the size
     public static void listMenu(ArrayList<Inventory> invList) {
         for (Inventory invItem : invList) {
-            System.out.println(invItem);
+            System.out.printf("%-12s | %-12s | %-12s | %-20s | %-12s\n", invItem.getVin(), invItem.getYear(), invItem.getMake(), invItem.getModel(), "$" + invItem.getPrice());
 
 
         }
     }
 
-    public Inventory printMenuInfo() {
-        //System.out.print("-------------------------\n");​
-        System.out.printf("%-12s | %-12s | %-12s | %-20s | %-12s\n", vin, year, make, model, "$" + price);
-        return null;
-
-    }
 
     public Inventory addInventory() {
         Inventory invt = new Inventory();
         Scanner input = new Scanner(System.in);
         System.out.print("Enter a Vin Number: ");
-        invt.setVin(input.nextLine());
+        invt.setVin(input.nextInt());
+        input.nextLine();
         System.out.print("Enter the Make of Car: ");
         invt.setMake(input.nextLine());
         System.out.print("Enter the Model of Car: ");
@@ -132,12 +127,11 @@ public class Inventory {
 
     public static void removeCar(ArrayList<Inventory> invList) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Please enter a Vin number to delete the Car: ");
-        String vin = input.nextLine();
-
+        System.out.print("Please enter a Vin number to delete the Car: ");
+        int vin = input.nextInt();
         for (Inventory inv : invList) {
             if (vin == inv.getVin()) {
-                invList.remove(vin);
+                invList.remove(inv);
                 break;
             }
         }

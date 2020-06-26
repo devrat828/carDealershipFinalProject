@@ -19,6 +19,7 @@ public class Transaction extends Order {
 
     ArrayList<Transaction> sList = new ArrayList<Transaction>();
 
+
     int sCount = 1;
     private PaymentType paymentType;
     private String transactionId;
@@ -27,7 +28,7 @@ public class Transaction extends Order {
     private double orderTotal;
     private double totalPrice;
     private double tax = 1.06;
-    private String empSalesID;
+    private int empSalesID;
     private String sfullName;
 
 
@@ -75,11 +76,11 @@ public class Transaction extends Order {
         this.paymentType = paymentType;
     }
 
-    public String getEmpSalesID() {
+    public int getEmpSalesID() {
         return empSalesID;
     }
 
-    public void setEmpSalesID(String empSalesID) {
+    public void setEmpSalesID(int empSalesID) {
         this.empSalesID = empSalesID;
     }
 
@@ -110,35 +111,33 @@ public class Transaction extends Order {
         Transaction tran = new Transaction(); //Sales transaction constructor
         Customer cust = new Customer(); //Customer constructor
         Inventory car = new Inventory(); //Car constructor
+        Main main = new Main();
 
-        System.out.println("Enter transaction ID: ");
+        System.out.print("Enter transaction ID: ");
         transactionId = Exception.testAlphaNumeric(Exception.getInput());
         tran.setTransactionId(transactionId);
         sList.add(tran);
 
-        System.out.println("Please enter employee ID: ");
-        empSalesID = Exception.testAlphaNumeric(Exception.getInput());
+        System.out.print("Please enter employee ID: ");
+        empSalesID = scnr.nextInt();
         salesManager.setUserId(empSalesID);
 
-        System.out.println("Please enter employee name: ");
+        System.out.print("Please enter employee name: ");
         sfullName = Exception.testAlpha(Exception.getInput());
         salesManager.setUserName(sfullName);
 
 
-        System.out.println("Enter the VIN of the Car: ");
-        car.vin = Exception.testAlphaNumeric(Exception.getInput());
+        System.out.print("Enter the VIN of the Car: ");
+        car.vin = scnr.nextInt();
         car.setVin(car.vin);
 
 
-        System.out.println("Enter the sticker price of car as a double: "); //TODO: change this into the Order selection
+        System.out.print("Enter the sticker price of car as a double: $"); //TODO: change this into the Order selection
         double subTotal = scnr.nextDouble();
         tran.setSubTotal(subTotal);
         sList.add(tran);
 
-
-        System.out.println("Enter customer full name: ");
-        cust.custName = Exception.testAlpha(Exception.getInput());
-        cust.setCustomerName(cust.custName);
+        main.addCustomer();
 
         tran.setPaymentType();
 
@@ -151,7 +150,7 @@ public class Transaction extends Order {
         System.out.println("     -- SALE RECORD --      ");
         System.out.println(" ");
         System.out.println("Transaction ID: " + tran.getTransactionId());
-        System.out.println("Sold To: " + cust.getCustomerName());
+        System.out.println("Sold to: "); //TODO: need to add a mathod
         System.out.println("Employee ID #: " + salesManager.getUserId());
         System.out.println("Employee Name: " + salesManager.getUserName());
         System.out.println("Car VIN: " + car.getVin());
@@ -202,6 +201,8 @@ public class Transaction extends Order {
         totalPrice = Math.round(totalPrice*100.0)/100.0;
         return totalPrice;
     }
+
+
 }
 
 

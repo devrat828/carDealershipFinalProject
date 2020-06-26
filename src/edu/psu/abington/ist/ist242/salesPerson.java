@@ -9,35 +9,19 @@ Rev: 1
 */
 package edu.psu.abington.ist.ist242;
 
+import java.util.*;
 
+public class salesPerson extends User {
 
-public class salesPerson {
-
-    public int userId;
-    public String userName;
-
-
-    public salesPerson(int _userId, String _userName) {
-        this.userId = _userId;
-        this.userName = _userName;
-
+    public salesPerson(int userId) {
+        setUserId(userId);
     }
 
-    // GETTERS AND SETTERS ---------------------------------------------------------------------------------------
-    public int getUserId() {
-        return userId;
+    public salesPerson()
+    {}
+    public static void printSalesPerson(ArrayList<salesPerson> sList){
+        for (salesPerson sPerson: sList){
+            System.out.printf("%-15s | %-15s | %-15s | %-15s\n", sPerson.getUserId(), sPerson.getUserName(), sPerson.getUserPhone(), sPerson.getUserAddress());
+        }
     }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
 }

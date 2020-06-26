@@ -14,6 +14,9 @@ import java.util.*;
 
 public class Main {
 
+    int cCount = 0;
+    int sCount = 0;
+
     public static void main(String[] args) {
 
         double subTotal;
@@ -23,6 +26,8 @@ public class Main {
         Main main = new Main();
         // Customer obj
         Customer cust = new Customer();
+        // salesPerson obj
+        salesPerson sPerson = new salesPerson();
         // Order obj
         Order or = new Order();
         // Inventory object
@@ -35,21 +40,18 @@ public class Main {
         ArrayList<Inventory> iList = new ArrayList<>();
         ArrayList<Order> oList = new ArrayList<>();
         ArrayList<Transaction> tList = new ArrayList<>();
+        ArrayList<salesPerson> sList = new ArrayList<>();
 
         // INVENTORY LIST ---------------------------------------------------------------------------------------------------------------------------------------------
-        Inventory inv1 = new Inventory("1", "2020", "Honda", "Civic", 26899.99);
-        Inventory inv2 = new Inventory("2", "2021", "Ford", "Explorer", 46799.99);
-        Inventory inv3 = new Inventory("3", "2021", "Jeep", "Grand Cherokee", 39899.99);
-        Inventory inv4 = new Inventory("4", "2021", "Chevrolet", "Pickup", 42699.99);
+        Inventory inv1 = new Inventory(1, "2020", "Honda", "Civic", 26899.99);
+        Inventory inv2 = new Inventory(2, "2021", "Ford", "Explorer", 46799.99);
+        Inventory inv3 = new Inventory(3, "2021", "Jeep", "Grand Cherokee", 39899.99);
+        Inventory inv4 = new Inventory(4, "2021", "Chevrolet", "Pickup", 42699.99);
 
         iList.add(inv1);
         iList.add(inv2);
         iList.add(inv3);
         iList.add(inv4);
-
-        // SALESPERSON LIST ----------------------------------------------------------------------
-        salesPerson sales1 = new salesPerson(1, "Mark Smith");
-        salesPerson sales2 = new salesPerson(2, "Jennifer Green");
 
 
         System.out.println("---------------------------------------------------------");
@@ -65,21 +67,30 @@ public class Main {
         final char ORDER_CODE = '4'; //order page
         final char TRANS_CODE = '5'; //transaction page
         final char EXIT_CODE = 'E';
+        final char S_CODE = 'S';
+        final char SP_CODE = '6';
         char userAction;
 
 
-        final String PROMPT_ACTION = "\nMAIN MENU: \n1 - Add Customer\n2 - Print Customers\n3 - Inventory Page\n4 - Sell Car\n5 - Transaction Page\nE - Exit\nPlease Enter your Selection: ";
+        final String PROMPT_ACTION = "\nMAIN MENU: \n1 - Add Customer\n2 - Print Customers\n3 - Inventory Page\n4 - Sell Car\n5 - Transaction Page\nS - Add Employee\n6 - Print Employees\nE - Exit\nPlease Enter your Selection: ";
 
         userAction = getAction(PROMPT_ACTION);
 
         while (userAction != EXIT_CODE) {
             switch (userAction) {
                 case CUST_CODE: // Customers page
-                    cList.add(cust.addCustomer());
+                    cList.add(main.addCustomer());
                     break;
                 case PRINT_CUST:
                     System.out.printf("%-15s | %-15s | %-15s | %-15s\n", "ID", "Name", "Phone Number", "Address");
                     Customer.printCustomer(cList);
+                    break;
+                case S_CODE: // Employee page
+                    sList.add(main.addSalesPerson());
+                    break;
+                case SP_CODE:
+                    System.out.printf("%-15s | %-15s | %-15s | %-15s\n", "ID", "Name", "Phone Number", "Address");
+                    salesPerson.printSalesPerson(sList);
                     break;
                 case INV_CODE: //Inventory Page
                     Scanner input2 = new Scanner(System.in);
@@ -114,48 +125,15 @@ public class Main {
                         //get input2 menu id
                         Scanner input = new Scanner(System.in); //TODO: delete the cases and input from ilist instead
 
-                        inv1.printMenuInfo();
-                        inv2.printMenuInfo();
-                        inv3.printMenuInfo();
-                        inv4.printMenuInfo();
+                        Inventory.listMenu(iList);
 
                         System.out.println(" ");
-                        System.out.println("Enter Car ID: ");
+                        System.out.print("Enter Car ID: ");
                         int menuId = input.nextInt();
 
                         oList.add(or.order());
-
-                        switch (menuId) {
-                            case 1:
-                                subTotal = or.getSubTotal(inv1.getPrice("1")); //subTotal = or.getSubTotal(inv1.getPrice(1), qty);
-                                //System.out.println("$ " + subTotal);
-                                orderTotal += subTotal;
-                                or.printOrder(subTotal, inv1.getPrice("1"), inv1.getMake(), inv1.getModel()); //or.printOrder(subTotal, inv1.getPrice(1), /*qty*/, inv1.getMake());
-                                userAction = getAction(userInput);
-                                break;
-                            case 2:
-                                subTotal = or.getSubTotal(inv2.getPrice("2")); //subTotal = or.getSubTotal(inv2.getPrice(2), /*qty*/);
-                                //System.out.println("$ " + subTotal);
-                                orderTotal += subTotal;
-                                or.printOrder(subTotal, inv2.getPrice("2"), inv2.getMake(), inv2.getModel()); //or.printOrder(subTotal, inv2.getPrice(2), /*qty*/, inv2.getMake());
-                                userAction = getAction(userInput);
-                                break;
-                            case 3:
-                                subTotal = or.getSubTotal(inv3.getPrice("3")); //subTotal = or.getSubTotal(inv3.getPrice(3), /*qty*/);
-                                //System.out.println("$ " + subTotal);
-                                orderTotal += subTotal;
-                                or.printOrder(subTotal, inv3.getPrice("3"), inv3.getMake(), inv3.getModel()); //or.printOrder(subTotal, inv3.getPrice(3), /*qty*/, inv3.getMake());
-                                userAction = getAction(userInput);
-                                break;
-                            case 4:
-                                subTotal = or.getSubTotal(inv4.getPrice("4")); //subTotal = or.getSubTotal(inv4.getPrice(4), /*qty*/);
-                                //System.out.println("$ " + subTotal);
-                                orderTotal += subTotal;
-                                or.printOrder(subTotal, inv4.getPrice("4"), inv4.getMake(), inv4.getModel()); //or.printOrder(subTotal, inv4.getPrice(4), /*qty*/, inv4.getMake());
-                                userAction = getAction(userInput);
-                                break;
-                        }
                     }
+
 
 
                     //print order
@@ -211,4 +189,56 @@ public class Main {
         char firstChar = answer.charAt(0);
         return firstChar;
     }
+
+    // ADD A NEW CUSTOMER METHOD --------------------------------------------------------------------------------------------------------------------------------------------------
+    public Customer addCustomer() {
+        System.out.println("\nPlease Add Customer Information Below: ");
+        Customer cust = new Customer(cCount++);
+        Scanner scnr = new Scanner(System.in);
+        System.out.print("Please Enter your Name: ");
+        String name = (Exception.testAlpha(Exception.getInput()));
+        cust.setUserName(name);
+        System.out.print("Please Enter your Address: ");
+        cust.setUserAddress(scnr.nextLine());
+        System.out.print("Please Enter Customer Phone number, please use this format (XXX) XXX-XXXX: ");
+        String phone = (Exception.testPhone(Exception.getInput()));
+        cust.setUserPhone(phone);
+        cust.setUserId(cCount);
+        return cust;
+    }
+
+    // ADD A NEW SALESPERSON METHOD -------------------------------------------------------------------------------------------------------------------------------------------------
+    public salesPerson addSalesPerson() {
+        System.out.println("\nPlease Add Sales Person Information Below: ");
+        salesPerson sPerson = new salesPerson(sCount++);
+        Scanner scnr = new Scanner(System.in);
+        System.out.print("Please Enter your Name: ");
+        String name = (Exception.testAlpha(Exception.getInput()));
+        sPerson.setUserName(name);
+        System.out.print("Please Enter your Address: ");
+        sPerson.setUserAddress(scnr.nextLine());
+        System.out.print("Please Enter Sales Person Phone number, please use this format (XXX) XXX-XXXX: ");
+        String phone = (Exception.testPhone(Exception.getInput()));
+        sPerson.setUserPhone(phone);
+        sPerson.setUserId(sCount);
+        return sPerson;
+    }
+
+    public boolean checker(int a, ArrayList<Customer> cList) {
+        Iterator itr = cList.iterator();
+        boolean result = false;
+        // while(!result) {
+        while(itr.hasNext()) {
+            Customer cust = (Customer) itr.next();
+            if(cust.getUserId() == a){
+                result = true;
+                break;
+            }else{
+                result = false;
+            }
+        }
+        return result;
+    }
+
+
 }
