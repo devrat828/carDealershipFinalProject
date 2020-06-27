@@ -64,34 +64,4 @@ public class Order {
         return order;
     }
 
-    // METHODS -------------------------------------------------------------------------------------------------------
-
-    // PRINT ORDER
-    public void printOrder(double _subtotal, double _price, String make, String model) { //int _quantity, String menuItem) {
-        System.out.println("You have selected: \n" + make + " " + model + " " + "\nList Price: " + "$" + _price +" \n"); //" * " +  _quantity + " = " + "$ " + _subtotal); //TODO: possibly delete some part of this line
-    }
-
-    // PRINT ORDER DETAILS
-    public static void listOrder(ArrayList<Order> oList) {
-        for (Order orderDetails : oList) {
-            System.out.println(orderDetails.getorderId());
-        }
-    }
-
-    // GET SUBTOTAL
-
-    public double getSubTotal(double _price) { //double quantity) {
-        double subTotal = _price; //* quantity;
-        totalPrice += subTotal;
-        return subTotal;
-    }
-
-
-
-
-
-
-
-
-
 }

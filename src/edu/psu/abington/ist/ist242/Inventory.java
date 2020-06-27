@@ -97,17 +97,31 @@ public class Inventory {
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-    //add method to change menuItem price depending on the size
+    /**
+    Print Inventory
+    @context            Prints all details in the arraylist of inventor
+    @param invList      arraylist of inventory
+    @returns            Nothing
+    @version            1.0
+    @since              2020-06-26
+     @author            Team 4
+    */
     public static void listMenu(ArrayList<Inventory> invList) {
         for (Inventory invItem : invList) {
             System.out.printf("%-12s | %-12s | %-12s | %-20s | %-12s\n", invItem.getVin(), invItem.getYear(), invItem.getMake(), invItem.getModel(), "$" + invItem.getPrice());
 
-
         }
     }
 
-
+    /**
+    Add Inventory method
+    @context        add into inventory and asks the user for info and saves it in class
+    @paramnun
+    @returns        the inventory info that was asked by the program
+    @version        1.0
+    @since          2020-06-26
+     @author        Team 4
+    */
     public Inventory addInventory() {
         Inventory invt = new Inventory();
         Scanner input = new Scanner(System.in);
@@ -125,6 +139,15 @@ public class Inventory {
         return invt;
     }
 
+    /**
+    Remove Inventory method
+    @context            removes the car from the inventory
+    @param  invList     arraylist of inventory
+    @returns            Nothing
+    @version            1.0
+    @since              2020-06-26
+     @author            Team 4
+    */
     public static void removeCar(ArrayList<Inventory> invList) {
         Scanner input = new Scanner(System.in);
         System.out.print("Please enter a Vin number to delete the Car: ");

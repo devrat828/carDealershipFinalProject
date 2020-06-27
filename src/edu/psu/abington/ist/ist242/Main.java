@@ -14,13 +14,12 @@ import java.util.*;
 
 public class Main {
 
-    int cCount = 0;
-    int sCount = 0;
+    int cCount = 2;
+    int sCount = 2;
 
     public static void main(String[] args) {
 
-        double subTotal;
-        double orderTotal = 0;
+
 
         // Main object
         Main main = new Main();
@@ -53,6 +52,18 @@ public class Main {
         iList.add(inv3);
         iList.add(inv4);
 
+        Customer cus1 = new Customer(1,"Sam Ronalds", "(717) 429-1234", "1234 Demo 1 Street, mechanicsburg Pa, 17050");
+        Customer cus2 = new Customer(2,"Will Parker", "(717) 323-4234", "1235 Demo 2 Street, enola Pa, 17025");
+
+        cList.add(cus1);
+        cList.add(cus2);
+
+        salesPerson sP1 = new salesPerson(1, "Jack Donald", "(717) 379-2323", "1236 Demo 3 Street, Harrisburg Pa, 17012");
+        salesPerson sP2 = new salesPerson(2, "Chris Evans", "(715) 353-2334", "1237 Demo 4 Street, Middletown Pa, 17143");
+
+        sList.add(sP1);
+        sList.add(sP2);
+
 
         System.out.println("---------------------------------------------------------");
         System.out.println("                   Car Dealership                        ");
@@ -62,17 +73,16 @@ public class Main {
 
         final char CUST_CODE = '1'; //customer page
         final char PRINT_CUST = '2'; //print cust
-        final char INV_CODE = '3'; //inventory page
-        //final char SALES_CODE = '4'; //sales person
-        final char ORDER_CODE = '4'; //order page
-        final char TRANS_CODE = '5'; //transaction page
+        final char INV_CODE = '5'; //inventory page
+        final char ORDER_CODE = '6'; //order page
+        final char TRANS_CODE = '7'; //transaction page
         final char EXIT_CODE = 'E';
-        final char S_CODE = 'S';
-        final char SP_CODE = '6';
+        final char S_CODE = '3';
+        final char SP_CODE = '4';
         char userAction;
 
 
-        final String PROMPT_ACTION = "\nMAIN MENU: \n1 - Add Customer\n2 - Print Customers\n3 - Inventory Page\n4 - Sell Car\n5 - Transaction Page\nS - Add Employee\n6 - Print Employees\nE - Exit\nPlease Enter your Selection: ";
+        final String PROMPT_ACTION = "\nMAIN MENU: \n1 - Add Customer\n2 - Print Customers\n3 - Add Employee\n4 - Print Employees\n5 - Inventory Page\n6 - Sell Car\n7 - Transaction Page\nE - Exit\nPlease Enter your Selection: ";
 
         userAction = getAction(PROMPT_ACTION);
 
@@ -151,7 +161,7 @@ public class Main {
 
                 case TRANS_CODE: //Transaction Page
                     Transaction transaction = new Transaction();
-                    transaction.sellCar(sList,cList,oList,iList);
+                    transaction.sellCar(sList,cList,oList);
                     break;
             }
             userAction = getAction(PROMPT_ACTION);
@@ -159,6 +169,15 @@ public class Main {
     }
 
     // METHOD TO GET USER CHOICE FOR MENU --------------------------------------------------------------------
+    /**
+    getAction method
+    @context        Prompt the user for menu
+    @param prompt   Char variable
+    @returns        user's action
+    @version        1.0
+    @since          2020-06-26
+     @author        Team 4
+    */
     public static char getAction(String prompt) {
         Scanner scnr = new Scanner(System.in);
         String answer = "";
@@ -169,6 +188,15 @@ public class Main {
     }
 
     // ADD A NEW CUSTOMER METHOD --------------------------------------------------------------------------------------------------------------------------------------------------
+    /**
+     addCustomer method
+     @context        Add Customers into the system
+     @paramnun
+     @returns        customers
+     @version        1.0
+     @since          2020-06-26
+     @author        Team 4
+     */
     public Customer addCustomer() {
         System.out.println("\nPlease Add Customer Information Below: ");
         Customer cust = new Customer(cCount++);
@@ -186,6 +214,15 @@ public class Main {
     }
 
     // ADD A NEW SALESPERSON METHOD -------------------------------------------------------------------------------------------------------------------------------------------------
+    /**
+     addSalesPerson method
+     @context        Add employees into the system
+     @paramnun
+     @returns        sales person
+     @version        1.0
+     @since          2020-06-26
+     @author         Team 4
+     */
     public salesPerson addSalesPerson() {
         System.out.println("\nPlease Add Sales Person Information Below: ");
         salesPerson sPerson = new salesPerson(sCount++);
@@ -202,10 +239,19 @@ public class Main {
         return sPerson;
     }
 
+    /**
+     checker method
+     @context        Checks if the customer is in the system
+     @param a        customer ID
+     @param cList    customer ArrayList
+     @returns        boolean true or false if the customer is in the list or not
+     @version        1.0
+     @since          2020-06-26
+     @author         Team 4
+     */
     public boolean checker(int a, ArrayList<Customer> cList) {
         Iterator itr = cList.iterator();
         boolean result = false;
-        // while(!result) {
         while(itr.hasNext()) {
             Customer cust = (Customer) itr.next();
             if(cust.getUserId() == a){
@@ -218,6 +264,15 @@ public class Main {
         return result;
     }
 
+    /**
+     addOrder method
+     @context        Add orders to order list
+     @paramnun
+     @returns        orders
+     @version        1.0
+     @since          2020-06-26
+     @author         Team 4
+     */
     public Order addOrder(){
         Order ord = new Order();
         Scanner scnr = new Scanner(System.in);
@@ -225,6 +280,17 @@ public class Main {
         ord.setOrder(scnr.nextInt());
         return ord;
     }
+
+    /**
+     sChecker method
+     @context        Checks if the salesPerson is in the system
+     @param a        salesPerson ID
+     @param sList    salesPerson ArrayList
+     @returns        boolean true or false if the salesPerson is in the list or not
+     @version        1.0
+     @since          2020-06-26
+     @author         Team 4
+     */
     public boolean sChecker(int a, ArrayList<salesPerson> sList) {
         Iterator itr = sList.iterator();
         boolean result = false;

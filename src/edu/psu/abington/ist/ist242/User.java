@@ -12,12 +12,14 @@ package edu.psu.abington.ist.ist242;
 
 public class User {
 
+    //Private variables
     private int userId;
     private String userName;
     private String userPhone;
     private String userAddress;
 
 
+    //Constructor Method
     public User(int userId, String userName, String userPhone, String userAddress) {
         this.userId = userId;
         this.userName = userName;
@@ -27,11 +29,11 @@ public class User {
     }
 
 
-
+    //Empty Constructor
     public User() {
     }
 
-
+    //Getter and Setter
     public int getUserId() {
         return userId;
     }
@@ -63,8 +65,6 @@ public class User {
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
     }
-
-
 
 }
 

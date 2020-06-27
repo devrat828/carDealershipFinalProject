@@ -93,7 +93,19 @@ public class Transaction extends Order {
 
 
 
-    public Transaction sellCar(ArrayList<salesPerson> sList,ArrayList<Customer> cList, ArrayList<Order> oList, ArrayList<Inventory> iList){
+    /**
+     * Sell a Car
+     *
+     * @param sList         who is selling the car
+     * @param cList         who is getting the car
+     * @param oList         the cars order
+     * @return
+     * @context             prints details
+     * @author              Team 4
+     * @version             3.0
+     * @since               2020-06-26
+     */
+    public Transaction sellCar(ArrayList<salesPerson> sList,ArrayList<Customer> cList, ArrayList<Order> oList){
         Scanner scnr = new Scanner(System.in);
         Transaction tran = new Transaction();
         Main main = new Main();
@@ -182,7 +194,15 @@ public class Transaction extends Order {
 
         return tran;
     }
-
+    /**
+     * Sets Payment Type
+     *
+     * @return              payment method
+     * @context             asks user what type of payment
+     * @author              Team 4
+     * @version             3.0
+     * @since               2020-06-26
+     */
     public PaymentType setPaymentType(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter payment type ( 'cash / 'credit' / 'financing' ): ");
@@ -190,22 +210,20 @@ public class Transaction extends Order {
         return _payment;
     }
 
+    /**
+     * Commission
+     *
+     * @param _value        value of the car
+     * @return              commission
+     * @context             gets the commission
+     * @author              Team 4
+     * @version             3.0
+     * @since               2020-06-26
+     */
     public double setSalesCommission(double _value) {
         double comm = _value*0.15;
         return comm;
     }
-
-    public void listTransactions(ArrayList<Transaction> sList) { //TODO: fix how to add transaction to the slist from the user input
-        for (Transaction tran : sList) {
-            System.out.println();
-            System.out.println("Transaction ID: " + tran.getTransactionId());
-            System.out.println("Subtotal: $" + df2.format(tran.getSubTotal()));
-            System.out.println("Total price: $" + df2.format(tran.getTotalPrice()));
-            System.out.println("Payment type: " + tran.getPaymentType());
-            System.out.println("Commission from sale: $" + df2.format(tran.getCommission()));
-        }
-    }
-
 
     private static DecimalFormat df2 = new DecimalFormat("#.00");
 

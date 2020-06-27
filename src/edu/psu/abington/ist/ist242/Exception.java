@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class Exception extends Throwable {
 
 
+
     public static String getInput() {
         Scanner scnr = new Scanner(System.in);
         String input = scnr.nextLine();
